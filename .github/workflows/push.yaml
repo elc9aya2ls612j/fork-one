@@ -27,7 +27,11 @@ jobs:
             # Checkout the main branch
             git checkout main
             # Merge the upstream
-            git merge upstream/main
+            git merge upstream/main || true
+            # Resolve conflicts by discarding the changes from the fork
+            git checkout --theirs .
+            # Commit the changes
+            git commit -a -m "Merge upstream" --allow-empty
             # Push the changes
             git push
             # Go back to the parent repo
